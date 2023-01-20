@@ -1,5 +1,6 @@
 import 'package:awesome_app/view/ui/home.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: scaffoldMessengerKey,
       title: 'Awesome App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.purple,
+          textTheme: GoogleFonts.poppinsTextTheme()),
       home: const HomePage(),
     );
   }
