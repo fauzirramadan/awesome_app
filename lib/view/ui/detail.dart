@@ -1,4 +1,5 @@
 import 'package:awesome_app/data/model/photo.dart';
+import 'package:awesome_app/view/widgets/loading_circular.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -18,6 +19,13 @@ class DetailPage extends StatelessWidget {
               child: Image.network(
                 data?.src?.original ?? "",
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    return const LoadingCircular();
+                  } else {
+                    return child;
+                  }
+                },
               )),
           const SizedBox(
             height: 20,

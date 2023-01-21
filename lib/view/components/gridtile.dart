@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awesome_app/utils/nav_utils.dart';
 import 'package:awesome_app/view/ui/detail.dart';
 import 'package:awesome_app/view/widgets/loading_circular.dart';
