@@ -1,5 +1,4 @@
 import 'package:awesome_app/bloc/photos_cubit/photos_cubit.dart';
-import 'package:awesome_app/view/widgets/loading_circular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,23 +19,11 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Discover"),
         ),
-        body: Column(children: [
+        body: Column(children: const [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 12, right: 12),
-              child: BlocBuilder<PhotosCubit, PhotosState>(
-                builder: (context, state) {
-                  var cubit = context.read<PhotosCubit>();
-                  if (state is PhotosInitial) {
-                    cubit.getPhotos();
-                  }
-                  return state is PhotosLoading
-                      ? const LoadingCircular()
-                      : CustomGridTile(
-                          cubit: cubit,
-                        );
-                },
-              ),
+              padding: EdgeInsets.only(top: 10.0, left: 12, right: 12),
+              child: CustomGridTile(),
             ),
           ),
         ]),
