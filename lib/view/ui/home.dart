@@ -22,7 +22,8 @@ class HomePage extends StatelessWidget {
         body: Column(children: const [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(top: 10.0, left: 12, right: 12),
+              padding:
+                  EdgeInsets.only(top: 10.0, left: 12, right: 12, bottom: 10),
               child: CustomGridTile(),
             ),
           ),

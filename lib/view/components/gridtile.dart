@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:awesome_app/utils/nav_utils.dart';
+import 'package:awesome_app/view/ui/detail.dart';
 import 'package:awesome_app/view/widgets/loading_circular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,15 +37,20 @@ class CustomGridTile extends StatelessWidget {
           itemBuilder: (context, index) {
             var data = cubit.listPhoto[index];
 
-            return Image(
-              image: NetworkImage("${data.src?.medium}"),
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress != null) {
-                  return const LoadingCircular();
-                } else {
-                  return child;
-                }
-              },
+            return GestureDetector(
+              onTap: () => Nav.to(DetailPage(
+                data: data,
+              )),
+              child: Image(
+                image: NetworkImage("${data.src?.medium}"),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    return const LoadingCircular();
+                  } else {
+                    return child;
+                  }
+                },
+              ),
             );
           },
         );
