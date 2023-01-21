@@ -1,15 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../../bloc/photos_cubit/photos_cubit.dart';
+
 class CustomGridTile extends StatelessWidget {
-  const CustomGridTile({
-    Key? key,
-  }) : super(key: key);
+  final PhotosCubit? cubit;
+  const CustomGridTile({Key? key, this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: 15,
+      itemCount: cubit?.listPhoto.length,
       gridDelegate: SliverWovenGridDelegate.count(
         crossAxisCount: 2,
         mainAxisSpacing: 1,
@@ -21,8 +24,13 @@ class CustomGridTile extends StatelessWidget {
         ],
       ),
       itemBuilder: (context, index) {
-        return Container(
-          color: Colors.grey[200],
+        var data = cubit?.listPhoto[index];
+
+        return Image(
+          image: NetworkImage("${data?.src?.medium}", headers: {
+            "Authorization":
+                "VpKonmdWMy3iMNtsFOZltVSQsjm4XOctpdrWT29df6PLROCAwZMd2rMw"
+          }),
         );
       },
     );
