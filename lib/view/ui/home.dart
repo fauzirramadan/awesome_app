@@ -1,41 +1,37 @@
+import 'package:awesome_app/bloc/photos_cubit/photos_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../components/gridtile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Discover"),
-      ),
-      body: Column(children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10.0, left: 12, right: 12),
-            child: GridView.builder(
-              itemCount: 15,
-              gridDelegate: SliverWovenGridDelegate.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 1,
-                crossAxisSpacing: 2,
-                pattern: [
-                  const WovenGridTile(0.9),
-                  const WovenGridTile(0.7,
-                      crossAxisRatio: 0.9,
-                      alignment: AlignmentDirectional.centerEnd)
-                ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PhotosCubit(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Discover"),
+        ),
+        body: Column(children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0, left: 12, right: 12),
+              child: BlocBuilder<PhotosCubit, PhotosState>(
+                builder: (context, state) {
+                  return CustomGridTile();
+                },
               ),
-              itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.grey[200],
-                );
-              },
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
