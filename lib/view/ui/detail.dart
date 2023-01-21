@@ -23,13 +23,23 @@ class DetailPage extends StatelessWidget {
             height: 20,
           ),
           Expanded(
-              child: Column(
-            children: [
-              Text(
-                data?.photographer ?? "",
-                style: const TextStyle(fontSize: 18),
-              )
-            ],
+              child: Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Column(
+              children: [
+                Text(
+                  data?.photographer ?? "",
+                  style: const TextStyle(fontSize: 18),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  data?.url ?? "",
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ],
+            ),
           ))
         ],
       ),
