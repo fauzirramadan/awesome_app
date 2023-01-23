@@ -15,8 +15,6 @@ class PhotosCubit extends Cubit<PhotosState> {
   PhotosCubit() : super(PhotosInitial());
 
   final GeneralRepository _repo = GeneralRepository();
-  ScrollController scrollController = ScrollController();
-  final nextPageTrigger = 0.8;
   int page = 1;
   List<Photo> listPhoto = [];
 
@@ -30,7 +28,27 @@ class PhotosCubit extends Cubit<PhotosState> {
     }, success: (s) {
       if (s.photos != null) {
         listPhoto = s.photos ?? [];
-        emit(PhotoSuccess());
+        emit(PhotoSuccess(listPhoto));
+      } else {
+        NotifUtils.showSnackbar("Something went wrong",
+            backgroundColor: Colors.red);
+        emit(PhotoFailed("gagal"));
+      }
+    });
+  }
+
+  Future<void> loadMorePhotos() async {
+    emit(PhotoLoadMore());
+    Either<Failure, ResGetPhotos> res = await _repo.dataPhotos(page + 1);
+    res.when(error: (e) {
+      log(e.toString());
+      NotifUtils.showSnackbar("$e", backgroundColor: Colors.red);
+      emit(PhotoFailed(e.message));
+    }, success: (s) {
+      if (s.photos != null) {
+        listPhoto.addAll(s.photos ?? []);
+        page++;
+        emit(PhotoSuccess(listPhoto));
       } else {
         NotifUtils.showSnackbar("Something went wrong",
             backgroundColor: Colors.red);

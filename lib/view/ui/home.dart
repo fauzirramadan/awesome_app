@@ -19,11 +19,11 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Discover"),
         ),
-        body: Column(children: const [
+        body: Column(children: [
           Expanded(
             child: Padding(
-              padding:
-                  EdgeInsets.only(top: 10.0, left: 12, right: 12, bottom: 10),
+              padding: const EdgeInsets.only(
+                  top: 10.0, left: 12, right: 12, bottom: 10),
               child: CustomGridTile(),
             ),
           ),
