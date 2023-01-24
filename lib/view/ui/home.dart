@@ -18,12 +18,15 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Discover"),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.widgets))
+          ],
         ),
-        body: Column(children: [
+        body: Column(children: const [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10.0, left: 12, right: 12, bottom: 10),
+              padding:
+                  EdgeInsets.only(top: 10.0, left: 12, right: 12, bottom: 10),
               child: CustomGridTile(),
             ),
           ),
